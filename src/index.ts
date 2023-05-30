@@ -39,14 +39,17 @@ function getType (data: any): DataType {
  */
 export function sort (data: any, asc = true): any {
   switch (getType(data)) {
+
     case DataType.ARRAY:
-      return data.map((d: any) => getType(d) === DataType.OBJECT || getType(d) === DataType.ARRAY ? sort(d, asc) : d)
+      return data.map((d: any) => [DataType.OBJECT, DataType.ARRAY].includes(getType(d)) ? sort(d, asc) : d)
 
     case DataType.OBJECT:
       const keys = Object.keys(data).sort()
+
       if (!asc) keys.reverse()
+
       return keys.reduce((newData: any, key: string) => {
-        if (getType(data[key]) === DataType.OBJECT || getType(data[key]) === DataType.ARRAY)
+        if ([DataType.OBJECT, DataType.ARRAY].includes(getType(data[key])))
           newData[key] = sort(data[key], asc)
         else
           newData[key] = data[key]
