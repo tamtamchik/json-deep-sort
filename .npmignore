@@ -1,5 +1,6 @@
 # Ignore the .idea directory
 .idea/
+.circleci/
 
 # Ignore TypeScript source and test files
 src/
