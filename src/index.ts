@@ -15,19 +15,24 @@ enum DataType {
  * @returns {DataType} The DataType value corresponding to the data's type.
  */
 function getType (data: any): DataType {
-  const objectConstructor = {}.constructor
-  const arrayConstructor = [].constructor
-  const stringConstructor = ''.constructor
-
-  if (data && data.constructor === objectConstructor) {
-    return DataType.OBJECT
-  } else if (data && data.constructor === arrayConstructor) {
+  if (Array.isArray(data)) {
     return DataType.ARRAY
-  } else if (data && data.constructor === stringConstructor) {
+  } else if (typeof data === 'object' && data !== null) {
+    return DataType.OBJECT
+  } else if (typeof data === 'string') {
     return DataType.STRING
   } else {
     return DataType.OTHER
   }
+}
+
+/**
+ * Function to determine whether the provided data is a recursive type.
+ * @param {any} data - The data to be checked.
+ * @returns {boolean} Whether the data is a recursive type.
+ */
+function isRecursiveType (data: any): boolean {
+  return [DataType.OBJECT, DataType.ARRAY].includes(getType(data))
 }
 
 /**
@@ -41,7 +46,7 @@ export function sort (data: any, asc = true): any {
   switch (getType(data)) {
 
     case DataType.ARRAY:
-      return data.map((d: any) => [DataType.OBJECT, DataType.ARRAY].includes(getType(d)) ? sort(d, asc) : d)
+      return data.map((d: any) => isRecursiveType(d) ? sort(d, asc) : d)
 
     case DataType.OBJECT:
       const keys = Object.keys(data).sort()
@@ -49,10 +54,7 @@ export function sort (data: any, asc = true): any {
       if (!asc) keys.reverse()
 
       return keys.reduce((newData: any, key: string) => {
-        if ([DataType.OBJECT, DataType.ARRAY].includes(getType(data[key])))
-          newData[key] = sort(data[key], asc)
-        else
-          newData[key] = data[key]
+        newData[key] = isRecursiveType(data[key]) ? sort(data[key], asc) : data[key]
         return newData
       }, {})
 
