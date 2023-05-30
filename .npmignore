@@ -1,0 +1,31 @@
+# Ignore the .idea directory
+.idea/
+
+# Ignore TypeScript source and test files
+src/
+test/
+
+# Ignore any configuration files
+.tscconfig.json
+jest.config.js
+.eslintrc.js
+.prettierrc
+
+# Ignore node_modules
+node_modules/
+
+# Ignore all markdown files (keep only README)
+*.md
+!README.md
+
+# Ignore TypeScript definition files
+*.d.ts
+
+# Ignore the .git directory
+.git/
+
+# Ignore any logs
+*.log
+
+# Ignore the coverage directory
+coverage/
