@@ -1,6 +1,6 @@
 {
   "name": "@tamtamchik/json-deep-sort",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A comprehensive utility for sorting JSON objects by keys.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -31,12 +31,6 @@
     "json-utility",
     "json-tools"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
-    }
-  },
   "directories": {
     "test": "test"
   },
