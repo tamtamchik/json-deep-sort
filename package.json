@@ -1,0 +1,54 @@
+{
+  "name": "@tamtamchik/json-deep-sort",
+  "version": "1.0.0",
+  "description": "A comprehensive utility for sorting JSON objects by keys.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "author": "Yuri Tkachenko <yuri.tam.tkachenko@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/tamtamchik/json-deep-sort#readme",
+  "bugs": {
+    "url": "https://github.com/tamtamchik/json-deep-sort/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tamtamchik/json-deep-sort.git"
+  },
+  "keywords": [
+    "json",
+    "sort",
+    "json-sort",
+    "keysort",
+    "json-keysort",
+    "json-deep-sort",
+    "sorting",
+    "typescript",
+    "async-sort",
+    "synchronous-sort",
+    "json-manipulation",
+    "data-processing",
+    "json-utility",
+    "json-tools"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "@types/node": "20.2.5",
+    "typescript": "5.0.4"
+  },
+  "scripts": {
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "npm run build:cjs && npm run build:esm",
+    "dev": "tsc --watch",
+    "prepare": "npm run build"
+  }
+}
