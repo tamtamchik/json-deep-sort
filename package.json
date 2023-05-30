@@ -1,6 +1,6 @@
 {
   "name": "@tamtamchik/json-deep-sort",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "A comprehensive utility for sorting JSON objects by keys.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
