@@ -53,6 +53,7 @@
     "build": "npm run build:cjs && npm run build:esm",
     "dev": "tsc --watch",
     "prepare": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --coverage"
   }
 }
