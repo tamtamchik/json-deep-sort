@@ -87,12 +87,12 @@ describe('sort', () => {
 
   it('should throw an error for non-object, non-array input', () => {
     const input = 'string'
-    expect(() => sort(input)).toThrow('Invalid data type: expected an object or array.')
+    expect(() => sort(input)).toThrow('Invalid data type: expected an object or array of objects.')
 
     const inputNumber = 123
-    expect(() => sort(inputNumber)).toThrow('Invalid data type: expected an object or array.')
+    expect(() => sort(inputNumber)).toThrow('Invalid data type: expected an object or array of objects.')
 
     const inputNull = null
-    expect(() => sort(inputNull)).toThrow('Invalid data type: expected an object or array.')
+    expect(() => sort(inputNull)).toThrow('Invalid data type: expected an object or array of objects.')
   })
 })

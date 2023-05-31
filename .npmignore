@@ -1,16 +1,21 @@
 # Ignore the .idea directory
 .idea/
+
+# Ignore the CI directory
 .circleci/
+
+# Ignore the .git directory
+.git/
 
 # Ignore TypeScript source and test files
 src/
 test/
 
+# Ignore the coverage directory
+coverage/
+
 # Ignore any configuration files
-.tscconfig.json
 jest.config.js
-.eslintrc.js
-.prettierrc
 
 # Ignore node_modules
 node_modules/
@@ -19,11 +24,3 @@ node_modules/
 *.md
 !README.md
 
-# Ignore the .git directory
-.git/
-
-# Ignore any logs
-*.log
-
-# Ignore the coverage directory
-coverage/

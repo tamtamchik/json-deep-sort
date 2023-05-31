@@ -3,10 +3,10 @@
  * @enum {string}
  */
 enum DataType {
-  OBJECT = 'OBJECT',
-  ARRAY = 'ARRAY',
-  STRING = 'STRING',
-  OTHER = 'OTHER',
+  OBJECT,
+  ARRAY,
+  STRING,
+  OTHER,
 }
 
 /**
@@ -59,6 +59,6 @@ export function sort (data: any, asc = true): any {
       }, {})
 
     default:
-      throw new Error('Invalid data type: expected an object or array.')
+      throw new Error('Invalid data type: expected an object or array of objects.')
   }
 }
