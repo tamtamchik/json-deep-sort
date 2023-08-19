@@ -42,7 +42,7 @@ function isRecursiveType (data: any): boolean {
  * @returns {any} The sorted data.
  * @throws {Error} If the data is not an object or array.
  */
-export function sort (data: any, asc = true): any {
+export function sort (data: any, asc: boolean = true): any {
   switch (getType(data)) {
 
     case DataType.ARRAY:
