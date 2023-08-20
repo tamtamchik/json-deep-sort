@@ -20,6 +20,9 @@ jest.config.js
 # Ignore node_modules
 node_modules/
 
+# Ingore Scrutinizer configuration
+.scrutinizer.yml
+
 # Ignore all markdown files (keep only README)
 *.md
 !README.md

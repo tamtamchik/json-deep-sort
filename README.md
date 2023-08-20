@@ -2,7 +2,9 @@
 
 [![Buy Me A Coffee][ico-coffee]][link-coffee]
 [![Latest Version on NPM][ico-version]][link-npm]
-[![CircleCI][ico-circleci]][link-circleci]
+[![Scrutinizer build][ico-scrutinizer-build]][link-scrutinizer]
+[![Scrutinizer quality][ico-scrutinizer-quality]][link-scrutinizer]
+[![Scrutinizer coverage][ico-scrutinizer-coverage]][link-scrutinizer]
 [![Software License][ico-license]](LICENSE)
 [![Total Downloads][ico-downloads]][link-downloads]
 
@@ -69,9 +71,11 @@ JSON Deep Sort is [MIT licensed](./LICENSE).
 [ico-version]: https://img.shields.io/npm/v/@tamtamchik/json-deep-sort.svg?style=flat-square
 [ico-license]: https://img.shields.io/npm/l/@tamtamchik/json-deep-sort.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/npm/dt/@tamtamchik/json-deep-sort.svg?style=flat-square
-[ico-circleci]: https://img.shields.io/circleci/build/github/tamtamchik/json-deep-sort.svg?style=flat-square
+[ico-scrutinizer-build]: https://img.shields.io/scrutinizer/build/g/tamtamchik/json-deep-sort/main.svg?style=flat-square
+[ico-scrutinizer-quality]: https://img.shields.io/scrutinizer/quality/g/tamtamchik/json-deep-sort/main.svg?style=flat-square
+[ico-scrutinizer-coverage]: https://img.shields.io/scrutinizer/coverage/g/tamtamchik/json-deep-sort/main.svg?style=flat-square
 
 [link-coffee]: https://www.buymeacoffee.com/tamtamchik
 [link-npm]: https://www.npmjs.com/package/@tamtamchik/json-deep-sort
 [link-downloads]: https://www.npmjs.com/package/@tamtamchik/json-deep-sort
-[link-circleci]: https://app.circleci.com/pipelines/github/tamtamchik/json-deep-sort?branch=main
+[link-scrutinizer]: https://scrutinizer-ci.com/g/tamtamchik/json-deep-sort/
