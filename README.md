@@ -8,9 +8,15 @@
 [![Software License][ico-license]](LICENSE)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-JSON Deep Sort is a comprehensive package that provides flexible sorting of JSON objects by keys. This
-TypeScript-written package can handle deeply nested objects and arrays, and offers both synchronous and asynchronous
-operations.
+JSON Deep Sort is a powerful and versatile TypeScript package designed for efficient sorting of JSON objects by keys. It offers:
+
+- Comprehensive handling of deeply nested objects and arrays
+- Flexible sorting options, including ascending and descending order
+- Support for both synchronous and asynchronous operations
+- Preservation of non-sortable objects (e.g., Date, RegExp, Function)
+- Lightweight implementation with zero dependencies
+
+Whether you're working with simple flat objects or complex nested structures, JSON Deep Sort provides a reliable solution for organizing your data.
 
 ## Installation
 
@@ -37,19 +43,38 @@ import { sort } from '@tamtamchik/json-deep-sort';
 Here is an example of sorting a JSON object:
 
 ```typescript
-let data = {
+// Example 1: Sorting a simple object
+const simpleData = { b: 'b', a: 'a', c: 'c' };
+console.log(sort(simpleData));
+// Output: { a: 'a', b: 'b', c: 'c' }
+
+// Example 2: Sorting a nested object
+const nestedData = {
     b: 'b',
     a: 'a',
-    c: {
-        d: 'd',
-        c: 'c',
-        a: 'a',
-        b: 'b'
-    }
+    c: { d: 'd', c: 'c', a: 'a', b: 'b' }
 };
+console.log(sort(nestedData));
+// Output: { a: 'a', b: 'b', c: { a: 'a', b: 'b', c: 'c', d: 'd' } }
 
-let sortedData = sort(data, true);
-// { a: 'a', b: 'b', c: { a: 'a', b: 'b', c: 'c', d: 'd' } }
+// Example 3: Sorting an array of objects
+const arrayData = [{ b: 'b', a: 'a' }, { d: 'd', c: 'c' }];
+console.log(sort(arrayData));
+// Output: [{ a: 'a', b: 'b' }, { c: 'c', d: 'd' }]
+
+// Example 4: Sorting in descending order
+const descendingData = { a: 'a', c: 'c', b: 'b' };
+console.log(sort(descendingData, false));
+// Output: { c: 'c', b: 'b', a: 'a' }
+
+// Example 5: Handling mixed data types
+const mixedData = {
+    b: [3, 1, 2],
+    a: { z: 'z', y: 'y' },
+    c: new Date('2023-01-01')
+};
+console.log(sort(mixedData));
+// Output: { a: { y: 'y', z: 'z' }, b: [3, 1, 2], c: Date('2023-01-01') }
 ```
 
 ## Contributing
