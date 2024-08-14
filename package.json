@@ -1,6 +1,6 @@
 {
   "name": "@tamtamchik/json-deep-sort",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "A comprehensive utility for sorting JSON objects by keys.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -33,10 +33,10 @@
   ],
   "devDependencies": {
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.11",
+    "@types/node": "^22.3.0",
     "jest": "^29.7.0",
-    "ts-jest": "^29.2.3",
-    "tsup": "^8.2.2",
+    "ts-jest": "^29.2.4",
+    "tsup": "^8.2.4",
     "typescript": "^5.5.4"
   },
   "exports": {

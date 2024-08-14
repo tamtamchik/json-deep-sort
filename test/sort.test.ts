@@ -1,16 +1,21 @@
 import { sort } from '../src'
 
 describe('sort', () => {
-  it('should sort an object', () => {
-    const input = { b: 'b', a: 'a' }
-    const expected = { a: 'a', b: 'b' }
+  it('should sort an object in ascending order by default', () => {
+    const input = { c: 'c', b: 'b', a: 'a' }
+    const expected = { a: 'a', b: 'b', c: 'c' }
     expect(sort(input)).toEqual(expected)
   })
 
-  it('should not sort an simple array', () => {
-    const input = ['a', 'b']
-    const expected = ['a', 'b']
-    expect(sort(input)).toEqual(expected)
+  it('should sort an object in descending order when specified', () => {
+    const input = { a: 'a', b: 'b', c: 'c' }
+    const expected = { c: 'c', b: 'b', a: 'a' }
+    expect(sort(input, false)).toEqual(expected)
+  })
+
+  it('should not modify an array of primitives', () => {
+    const input = ['b', 'a', 'c']
+    expect(sort(input)).toEqual(input)
   })
 
   it('should sort an array of objects', () => {
@@ -25,74 +30,41 @@ describe('sort', () => {
     expect(sort(input)).toEqual(expected)
   })
 
-  it('should sort an object with array values', () => {
+  it('should sort nested objects', () => {
     const input = {
-      b: ['b', 'a'],
-      a: ['d', 'c', 'b', 'a'],
+      b: { z: 'z', y: 'y' },
+      a: { x: 'x', w: 'w' },
     }
     const expected = {
-      a: ['d', 'c', 'b', 'a'],
+      a: { w: 'w', x: 'x' },
+      b: { y: 'y', z: 'z' },
+    }
+    expect(sort(input)).toEqual(expected)
+  })
+
+  it('should handle mixed nested structures', () => {
+    const input = {
+      b: ['b', 'a'],
+      a: { d: 'd', c: 'c' },
+    }
+    const expected = {
+      a: { c: 'c', d: 'd' },
       b: ['b', 'a'],
     }
     expect(sort(input)).toEqual(expected)
   })
 
-  it('should sort an object with nested objects', () => {
-    const input = {
-      a: 'a',
-      b: {
-        b: 'b',
-        a: 'a',
-      },
-    }
-    const expected = {
-      a: 'a',
-      b: {
-        a: 'a',
-        b: 'b',
-      },
-    }
-    expect(sort(input)).toEqual(expected)
+  it('should not throw an error for primitive inputs', () => {
+    expect(() => sort('string')).not.toThrow()
+    expect(() => sort(123)).not.toThrow()
+    expect(() => sort(null)).not.toThrow()
+    expect(() => sort(undefined)).not.toThrow()
   })
 
-  it('should not sort an array of simple arrays', () => {
-    const input = [
-      ['b', 'a'],
-      ['d', 'c', 'b', 'a'],
-    ]
-    const expected = [
-      ['b', 'a'],
-      ['d', 'c', 'b', 'a'],
-    ]
-    expect(sort(input)).toEqual(expected)
-  })
-
-  it('should sort an array containing objects', () => {
-    const input = [
-      { b: 'b', a: 'a' },
-      { d: 'd', c: 'c', b: 'b', a: 'a' },
-    ]
-    const expected = [
-      { a: 'a', b: 'b' },
-      { a: 'a', b: 'b', c: 'c', d: 'd' },
-    ]
-    expect(sort(input)).toEqual(expected)
-  })
-
-  it('should sort an object in descending order', () => {
-    const input = { b: 'b', a: 'a', c: 'c' }
-    const expected = { c: 'c', b: 'b', a: 'a' }
-    expect(sort(input, false)).toEqual(expected)
-  })
-
-  it('should throw an error for non-object, non-array input', () => {
-    const input = 'string'
-    expect(() => sort(input)).toThrow('Invalid data type: expected an object or array of objects.')
-
-    const inputNumber = 123
-    expect(() => sort(inputNumber)).toThrow('Invalid data type: expected an object or array of objects.')
-
-    const inputNull = null
-    expect(() => sort(inputNull)).toThrow('Invalid data type: expected an object or array of objects.')
+  it('should return primitive inputs unchanged', () => {
+    expect(sort('string')).toBe('string')
+    expect(sort(123)).toBe(123)
+    expect(sort(null)).toBe(null)
+    expect(sort(undefined)).toBe(undefined)
   })
 })
