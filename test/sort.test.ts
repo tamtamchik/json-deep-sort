@@ -54,16 +54,10 @@ describe('sort', () => {
     expect(sort(input)).toEqual(expected)
   })
 
-  it('should not throw an error for primitive inputs', () => {
-    expect(() => sort('string')).not.toThrow()
-    expect(() => sort(123)).not.toThrow()
-    expect(() => sort(null)).not.toThrow()
-    expect(() => sort(undefined)).not.toThrow()
-  })
-
   it('should return primitive inputs unchanged', () => {
     expect(sort('string')).toBe('string')
     expect(sort(123)).toBe(123)
+    expect(sort(true)).toBe(true)
     expect(sort(null)).toBe(null)
     expect(sort(undefined)).toBe(undefined)
   })
@@ -105,21 +99,27 @@ describe('sort', () => {
   })
 
   it('should handle objects with various value types', () => {
+    const date = new Date('2023-01-01')
+    const regex = /regex/
+    const func = () => 'function'
     const input = {
-      e: new Date('2023-01-01'),
-      d: /regex/,
+      e: date,
+      d: regex,
       c: [1, 2, 3],
       b: { nested: 'object' },
-      a: () => 'function'
+      a: func
     }
     const expected = {
-      a: input.a,
+      a: func,
       b: { nested: 'object' },
       c: [1, 2, 3],
-      d: /regex/,
-      e: input.e
+      d: regex,
+      e: date
     }
     expect(sort(input)).toEqual(expected)
+    expect(sort(input).e).toBe(date)
+    expect(sort(input).d).toBe(regex)
+    expect(sort(input).a).toBe(func)
   })
 
   it('should sort keys that are numbers or can be coerced to numbers', () => {
@@ -184,15 +184,34 @@ describe('sort', () => {
     })
 
     // Ensure the objects are the same instances
-    expect(result.date).toBe(date)
-    expect(result.regex).toBe(regex)
-    expect(result.func).toBe(func)
-    expect(result.error).toBe(error)
-    expect(result.map).toBe(map)
-    expect(result.set).toBe(set)
-    expect(result.weakMap).toBe(weakMap)
-    expect(result.weakSet).toBe(weakSet)
-    expect(result.promise).toBe(promise)
-    expect(result.iterable).toBe(iterable)
+    Object.keys(input).forEach(key => {
+      expect(result[key as keyof typeof input]).toBe(input[key as keyof typeof input])
+    })
+  })
+
+  it('should handle empty objects and arrays', () => {
+    expect(sort({})).toEqual({})
+    expect(sort([])).toEqual([])
+  })
+
+  it('should handle objects with symbol keys', () => {
+    const sym1 = Symbol('test1')
+    const sym2 = Symbol('test2')
+    const input = {
+      [sym1]: 'value1',
+      [sym2]: 'value2',
+      c: 'c',
+      a: 'a',
+      b: 'b'
+    }
+    const result = sort(input)
+    expect(Object.getOwnPropertySymbols(result)).toEqual([sym1, sym2])
+    expect(Object.keys(result)).toEqual(['a', 'b', 'c'])
+  })
+
+  it('should handle circular references', () => {
+    const obj: any = { a: 1 }
+    obj.self = obj
+    expect(() => sort(obj)).not.toThrow()
   })
 })
