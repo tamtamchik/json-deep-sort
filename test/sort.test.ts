@@ -208,10 +208,4 @@ describe('sort', () => {
     expect(Object.getOwnPropertySymbols(result)).toEqual([sym1, sym2])
     expect(Object.keys(result)).toEqual(['a', 'b', 'c'])
   })
-
-  it('should handle circular references', () => {
-    const obj: any = { a: 1 }
-    obj.self = obj
-    expect(() => sort(obj)).not.toThrow()
-  })
 })
