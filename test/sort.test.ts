@@ -289,16 +289,28 @@ describe('sort', () => {
       expect(sort([true], true, true)).toEqual([true]);
     });
 
-    it('should not treat arrays with null values as primitive arrays when sortPrimitiveArrays is true', () => {
+    it('should not sort arrays with null values when sortPrimitiveArrays is true', () => {
       const input = ['b', null, 'a'];
-      // Arrays with null should not be sorted as primitives, should maintain original order
+      // Arrays with null should maintain original order (not sortable)
       expect(sort(input, true, true)).toEqual(input);
     });
 
-    it('should not treat arrays with undefined values as primitive arrays when sortPrimitiveArrays is true', () => {
+    it('should not sort arrays with undefined values when sortPrimitiveArrays is true', () => {
       const input = ['b', undefined, 'a'];
-      // Arrays with undefined should not be sorted as primitives, should maintain original order
+      // Arrays with undefined should maintain original order (not sortable)
       expect(sort(input, true, true)).toEqual(input);
+    });
+
+    it('should not sort arrays with mixed null and undefined values when sortPrimitiveArrays is true', () => {
+      const input = ['b', null, 'a', undefined, 'c'];
+      // Arrays with mixed null/undefined should maintain original order (not sortable)
+      expect(sort(input, true, true)).toEqual(input);
+    });
+
+    it('should not sort arrays with mixed null and undefined values in descending order when sortPrimitiveArrays is true', () => {
+      const input = ['b', null, 'a', undefined, 'c'];
+      // Arrays with mixed null/undefined should maintain original order (not sortable)
+      expect(sort(input, false, true)).toEqual(input);
     });
 
     it('should sort arrays with all null values when sortPrimitiveArrays is true', () => {

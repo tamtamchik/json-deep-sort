@@ -1,4 +1,10 @@
-// Type definitions
+// Constants - make the code self-documenting
+const NULLISH_VALUES = [null, undefined] as const;
+const SORTABLE_PRIMITIVE_TYPES = ['string', 'number', 'boolean'] as const;
+
+// Type definitions that make sense
+type NullishValue = (typeof NULLISH_VALUES)[number];
+type SortablePrimitiveType = (typeof SORTABLE_PRIMITIVE_TYPES)[number];
 type ObjectType = Record<string | symbol, unknown>;
 type SortedEntry = [string | symbol, unknown];
 type NonSortableType =
@@ -18,7 +24,6 @@ type SortOptions = {
   sortPrimitiveArrays: boolean;
 };
 
-// Main public API
 export function sort<T>(
   data: T,
   ascending = true,
@@ -28,24 +33,22 @@ export function sort<T>(
   return sortRecursively(data, options);
 }
 
-// Core recursive sorting logic
 function sortRecursively<T>(data: T, options: SortOptions): T {
-  if (isPrimitive(data)) {
-    return data;
-  }
-
   if (Array.isArray(data)) {
     return sortArray(data, options) as T;
   }
 
-  if (isObject(data) && !isNonSortableObject(data)) {
+  if (isPrimitive(data) || isNonSortableObject(data)) {
+    return data;
+  }
+
+  if (isObject(data)) {
     return sortObject(data, options) as T;
   }
 
   return data;
 }
 
-// Array sorting logic
 function sortArray<T>(array: T[], options: SortOptions): T[] {
   if (shouldSortPrimitiveArray(array, options.sortPrimitiveArrays)) {
     return sortPrimitiveArray(array, options.ascending) as T[];
@@ -54,44 +57,59 @@ function sortArray<T>(array: T[], options: SortOptions): T[] {
   return array.map((item) => sortRecursively(item, options));
 }
 
-// Object sorting logic
 function sortObject(obj: ObjectType, options: SortOptions): ObjectType {
   const entries = collectObjectEntries(obj);
   const sortedEntries = sortObjectEntries(entries, options.ascending);
-
   return createSortedObject(sortedEntries, options);
 }
 
-// Primitive array sorting
 function shouldSortPrimitiveArray(
   array: unknown[],
   sortPrimitiveArrays: boolean
 ): boolean {
+  return sortPrimitiveArrays && canSortPrimitiveArray(array);
+}
+
+function canSortPrimitiveArray(array: unknown[]): boolean {
   return (
-    sortPrimitiveArrays && array.length > 0 && allItemsArePrimitives(array)
+    allItemsAreSortablePrimitives(array) && allItemsHaveSameSortableType(array)
   );
 }
 
-function allItemsArePrimitives(array: unknown[]): boolean {
-  return array.every((item) => isPrimitive(item));
+function allItemsAreSortablePrimitives(array: unknown[]): boolean {
+  return array.every(isSortablePrimitive);
 }
 
 function sortPrimitiveArray(array: unknown[], ascending: boolean): unknown[] {
-  if (!allItemsHaveSameType(array)) {
+  if (!allItemsHaveSameSortableType(array)) {
     return array; // Mixed types maintain original order
   }
 
-  return [...array].sort((a, b) => comparePrimitives(a, b, ascending));
+  return [...array].sort((a, b) => compareSortablePrimitives(a, b, ascending));
 }
 
-function allItemsHaveSameType(array: unknown[]): boolean {
+function allItemsHaveSameSortableType(array: unknown[]): boolean {
   if (array.length === 0) return true;
 
-  const firstType = typeof array[0];
-  return array.every((item) => typeof item === firstType);
+  // Don't sort arrays that contain nullish values
+  // as they represent absence of value and don't have a natural ordering
+  if (hasNullishValues(array)) {
+    return false;
+  }
+
+  // For arrays with only sortable primitives, check if they have the same type
+  const firstItem = array[0];
+  if (!isSortablePrimitive(firstItem)) return false;
+
+  const expectedType = typeof firstItem;
+  return array.every((item) => typeof item === expectedType);
 }
 
-function comparePrimitives(a: unknown, b: unknown, ascending: boolean): number {
+function compareSortablePrimitives(
+  a: unknown,
+  b: unknown,
+  ascending: boolean
+): number {
   if (typeof a === 'string' && typeof b === 'string') {
     return ascending ? a.localeCompare(b) : b.localeCompare(a);
   }
@@ -169,15 +187,25 @@ function createSortedObject(
   return Object.fromEntries(sortedEntries);
 }
 
-// Type guards
-function isPrimitive(data: unknown): boolean {
-  return (
-    data === null ||
-    data === undefined ||
-    typeof data === 'string' ||
-    typeof data === 'number' ||
-    typeof data === 'boolean'
+// Type guards - single responsibility, clear naming
+function isNullish(value: unknown): value is NullishValue {
+  return NULLISH_VALUES.includes(value as NullishValue);
+}
+
+function hasNullishValues(array: unknown[]): boolean {
+  return array.some(isNullish);
+}
+
+function isSortablePrimitive(
+  value: unknown
+): value is string | number | boolean {
+  return SORTABLE_PRIMITIVE_TYPES.includes(
+    typeof value as SortablePrimitiveType
   );
+}
+
+function isPrimitive(data: unknown): boolean {
+  return isSortablePrimitive(data) || isNullish(data);
 }
 
 function isObject(data: unknown): data is ObjectType {
