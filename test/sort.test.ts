@@ -230,6 +230,18 @@ describe('sort', () => {
       expect(sort(input, false, true)).toEqual(expected);
     });
 
+    it('should handle NaN values correctly when sorting arrays of numbers', () => {
+      const input = [3, NaN, 1, NaN, 5, 2];
+      const expected = [1, 2, 3, 5, NaN, NaN];
+      expect(sort(input, true, true)).toEqual(expected);
+    });
+
+    it('should handle NaN values correctly when sorting arrays of numbers in descending order', () => {
+      const input = [1, NaN, 5, NaN, 2, 3];
+      const expected = [5, 3, 2, 1, NaN, NaN];
+      expect(sort(input, false, true)).toEqual(expected);
+    });
+
     it('should sort arrays of booleans when sortPrimitiveArrays is true', () => {
       const input = [true, false, true, false];
       const expected = [false, false, true, true];
@@ -286,6 +298,18 @@ describe('sort', () => {
     it('should not treat arrays with undefined values as primitive arrays when sortPrimitiveArrays is true', () => {
       const input = ['b', undefined, 'a'];
       // Arrays with undefined should not be sorted as primitives, should maintain original order
+      expect(sort(input, true, true)).toEqual(input);
+    });
+
+    it('should sort arrays with all null values when sortPrimitiveArrays is true', () => {
+      const input = [null, null, null];
+      // Arrays with all null values should maintain order (all same type)
+      expect(sort(input, true, true)).toEqual(input);
+    });
+
+    it('should sort arrays with all undefined values when sortPrimitiveArrays is true', () => {
+      const input = [undefined, undefined, undefined];
+      // Arrays with all undefined values should maintain order (all same type)
       expect(sort(input, true, true)).toEqual(input);
     });
 

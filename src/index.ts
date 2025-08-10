@@ -31,34 +31,33 @@ function sortRecursively<T>(
   if (!isObject(data) || Array.isArray(data) || isNonSortableObject(data)) {
     if (Array.isArray(data)) {
       // If sortPrimitiveArrays is true and all items are primitives, sort the array
-      if (
-        sortPrimitiveArrays &&
-        data.length > 0 &&
-        data.every((item) => isPrimitive(item))
-      ) {
-        return [...data].sort((a, b) => {
-          if (typeof a === 'string' && typeof b === 'string') {
-            return ascending ? a.localeCompare(b) : b.localeCompare(a);
-          }
-          if (typeof a === 'number' && typeof b === 'number') {
-            return ascending ? a - b : b - a;
-          }
-          if (typeof a === 'boolean' && typeof b === 'boolean') {
-            return ascending
-              ? a === b
-                ? 0
-                : a
-                  ? 1
-                  : -1
-              : a === b
-                ? 0
-                : a
-                  ? -1
-                  : 1;
-          }
-          // For mixed types or other primitives, maintain original order
-          return 0;
-        }) as T;
+      if (sortPrimitiveArrays && data.length > 0 && allPrimitives(data)) {
+        // Check if all items are of the same primitive type
+        const firstType = typeof data[0];
+        const hasSameType = allSameType(data, firstType);
+
+        if (hasSameType) {
+          return (data as unknown[]).sort((a, b) => {
+            if (typeof a === 'string' && typeof b === 'string') {
+              return ascending ? a.localeCompare(b) : b.localeCompare(a);
+            }
+            if (typeof a === 'number' && typeof b === 'number') {
+              // Handle NaN values properly
+              if (Number.isNaN(a) && Number.isNaN(b)) return 0;
+              if (Number.isNaN(a)) return 1;
+              if (Number.isNaN(b)) return -1;
+              return ascending ? a - b : b - a;
+            }
+            if (typeof a === 'boolean' && typeof b === 'boolean') {
+              return compareBooleans(a, b, ascending);
+            }
+            // For null/undefined or other primitives, maintain original order
+            return 0;
+          }) as T;
+        } else {
+          // For mixed primitive types, maintain original order
+          return data as T;
+        }
       }
       // Otherwise, recursively sort array items
       return data.map((item) =>
@@ -78,10 +77,34 @@ function isObject(data: unknown): data is ObjectType {
 
 function isPrimitive(data: unknown): boolean {
   return (
+    data === null ||
+    data === undefined ||
     typeof data === 'string' ||
     typeof data === 'number' ||
     typeof data === 'boolean'
   );
+}
+
+// Optimized function to check if all items in an array are primitives
+// Exits early when it finds a non-primitive item
+function allPrimitives(data: unknown[]): boolean {
+  for (let i = 0; i < data.length; i++) {
+    if (!isPrimitive(data[i])) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// Optimized function to check if all items in an array are of the same type
+// Exits early when it finds an item of a different type
+function allSameType(data: unknown[], firstType: string): boolean {
+  for (let i = 1; i < data.length; i++) {
+    if (typeof data[i] !== firstType) {
+      return false;
+    }
+  }
+  return true;
 }
 
 // Function to sort object properties
@@ -131,4 +154,10 @@ function isNonSortableObject(obj: unknown): obj is NonSortableType {
     nonSortableTypes.some((type) => obj instanceof type) ||
     Symbol.iterator in Object(obj)
   );
+}
+
+function compareBooleans(a: boolean, b: boolean, ascending: boolean): number {
+  if (a === b) return 0;
+  if (a) return ascending ? 1 : -1;
+  return ascending ? -1 : 1;
 }
