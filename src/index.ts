@@ -4,7 +4,8 @@ type SortedEntry = [string | symbol, unknown];
 type NonSortableType =
   | Date
   | RegExp
-  | Function
+  | (() => unknown)
+  | ((...args: unknown[]) => unknown)
   | Error
   | Map<unknown, unknown>
   | Set<unknown>
@@ -36,24 +37,24 @@ function sortRecursively<T>(
         data.every((item) => !isObject(item))
       ) {
         return [...data].sort((a, b) => {
-          if (typeof a === "string" && typeof b === "string") {
+          if (typeof a === 'string' && typeof b === 'string') {
             return ascending ? a.localeCompare(b) : b.localeCompare(a);
           }
-          if (typeof a === "number" && typeof b === "number") {
+          if (typeof a === 'number' && typeof b === 'number') {
             return ascending ? a - b : b - a;
           }
-          if (typeof a === "boolean" && typeof b === "boolean") {
+          if (typeof a === 'boolean' && typeof b === 'boolean') {
             return ascending
               ? a === b
                 ? 0
                 : a
-                ? 1
-                : -1
+                  ? 1
+                  : -1
               : a === b
-              ? 0
-              : a
-              ? -1
-              : 1;
+                ? 0
+                : a
+                  ? -1
+                  : 1;
           }
           // For mixed types or other primitives, maintain original order
           return 0;
@@ -72,7 +73,7 @@ function sortRecursively<T>(
 
 // Helper function to check if a value is an object
 function isObject(data: unknown): data is ObjectType {
-  return typeof data === "object" && data !== null;
+  return typeof data === 'object' && data !== null;
 }
 
 // Function to sort object properties
@@ -89,9 +90,9 @@ function sortObject(
   ];
 
   const sortedEntries = entries.sort(([keyA], [keyB]) => {
-    if (typeof keyA === "symbol" && typeof keyB === "symbol") return 0;
-    if (typeof keyA === "symbol") return 1;
-    if (typeof keyB === "symbol") return -1;
+    if (typeof keyA === 'symbol' && typeof keyB === 'symbol') return 0;
+    if (typeof keyA === 'symbol') return 1;
+    if (typeof keyB === 'symbol') return -1;
     return ascending
       ? (keyA as string).localeCompare(keyB as string)
       : (keyB as string).localeCompare(keyA as string);
