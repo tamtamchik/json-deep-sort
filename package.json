@@ -1,6 +1,6 @@
 {
   "name": "@tamtamchik/json-deep-sort",
-  "version": "1.4.0-beta.1",
+  "version": "1.4.0-beta.2",
   "description": "A comprehensive utility for sorting JSON objects by keys.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -32,14 +32,14 @@
     "json-tools"
   ],
   "devDependencies": {
-    "@types/jest": "^29.5.13",
-    "@types/node": "^22.7.5",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.2.1",
     "@typescript-eslint/eslint-plugin": "^8.39.0",
     "@typescript-eslint/parser": "^8.39.0",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "jest": "^29.7.0",
+    "jest": "^30.0.5",
     "jiti": "^2.5.1",
     "prettier": "^3.6.2",
     "ts-jest": "^29.2.4",
