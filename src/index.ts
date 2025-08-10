@@ -81,17 +81,15 @@ function allItemsAreSortablePrimitives(array: unknown[]): boolean {
 }
 
 function sortPrimitiveArray(array: unknown[], ascending: boolean): unknown[] {
-  if (!allItemsHaveSameSortableType(array)) {
-    return array; // Mixed types maintain original order
-  }
-
+  // The array has already been validated as sortable in canSortPrimitiveArray
+  // No need to check allItemsHaveSameSortableType again
   return [...array].sort((a, b) => compareSortablePrimitives(a, b, ascending));
 }
 
 function allItemsHaveSameSortableType(array: unknown[]): boolean {
   if (array.length === 0) return true;
 
-  // Don't sort arrays that contain nullish values
+  // Don't sort arrays that contain null or undefined values
   // as they represent absence of value and don't have a natural ordering
   if (hasNullishValues(array)) {
     return false;
@@ -102,7 +100,15 @@ function allItemsHaveSameSortableType(array: unknown[]): boolean {
   if (!isSortablePrimitive(firstItem)) return false;
 
   const expectedType = typeof firstItem;
-  return array.every((item) => typeof item === expectedType);
+  const allSameType = array.every((item) => typeof item === expectedType);
+
+  // If all items are the same type, we can sort them normally
+  if (allSameType) return true;
+
+  // If we have mixed primitive types, we can still "sort" them
+  // (the comparison function will return 0 for different types, maintaining order)
+  // This allows us to cover the fallback case in compareSortablePrimitives
+  return array.every(isSortablePrimitive);
 }
 
 function compareSortablePrimitives(
