@@ -63,6 +63,5 @@
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix"
-  },
-  "type": "module"
+  }
 }
