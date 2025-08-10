@@ -50,15 +50,18 @@ console.log(sort(simpleData));
 
 // Example 2: Sorting a nested object
 const nestedData = {
-    b: 'b',
-    a: 'a',
-    c: { d: 'd', c: 'c', a: 'a', b: 'b' }
+  b: 'b',
+  a: 'a',
+  c: { d: 'd', c: 'c', a: 'a', b: 'b' },
 };
 console.log(sort(nestedData));
 // Output: { a: 'a', b: 'b', c: { a: 'a', b: 'b', c: 'c', d: 'd' } }
 
 // Example 3: Sorting an array of objects
-const arrayData = [{ b: 'b', a: 'a' }, { d: 'd', c: 'c' }];
+const arrayData = [
+  { b: 'b', a: 'a' },
+  { d: 'd', c: 'c' },
+];
 console.log(sort(arrayData));
 // Output: [{ a: 'a', b: 'b' }, { c: 'c', d: 'd' }]
 
@@ -69,13 +72,34 @@ console.log(sort(descendingData, false));
 
 // Example 5: Handling mixed data types
 const mixedData = {
-    b: [3, 1, 2],
-    a: { z: 'z', y: 'y' },
-    c: new Date('2023-01-01')
+  b: [3, 1, 2],
+  a: { z: 'z', y: 'y' },
+  c: new Date('2023-01-01'),
 };
 console.log(sort(mixedData));
 // Output: { a: { y: 'y', z: 'z' }, b: [3, 1, 2], c: Date('2023-01-01') }
+
+// Example 6: Sorting arrays of primitives
+const primitiveArrayData = ['b', 'a', 'c'];
+console.log(sort(primitiveArrayData, true, true));
+// Output: ['a', 'b', 'c']
 ```
+
+## API Reference
+
+### `sort(data, ascending?, sortPrimitiveArrays?)`
+
+Sorts a JSON object or array by keys in a specified order.
+
+**Parameters:**
+
+- `data` (required): The data to sort. Can be an object, array, or primitive value.
+- `ascending` (optional): Boolean flag to determine sort order. Defaults to `true` (ascending).
+- `sortPrimitiveArrays` (optional): Boolean flag to enable sorting of arrays containing primitive values (strings, numbers, booleans). Defaults to `false` to maintain backward compatibility.
+
+**Returns:** The sorted data with the same structure and type as the input.
+
+**Note:** When `sortPrimitiveArrays` is `false` (default), arrays of primitives are not modified, preserving the original behavior. When `true`, primitive arrays are sorted according to the `ascending` parameter.
 
 ## Contributing
 
@@ -92,7 +116,6 @@ JSON Deep Sort is [MIT licensed](./LICENSE).
 [ico-scrutinizer-build]: https://img.shields.io/scrutinizer/build/g/tamtamchik/json-deep-sort/main.svg?style=flat-square
 [ico-scrutinizer-quality]: https://img.shields.io/scrutinizer/quality/g/tamtamchik/json-deep-sort/main.svg?style=flat-square
 [ico-scrutinizer-coverage]: https://img.shields.io/scrutinizer/coverage/g/tamtamchik/json-deep-sort/main.svg?style=flat-square
-
 [link-coffee]: https://www.buymeacoffee.com/tamtamchik
 [link-npm]: https://www.npmjs.com/package/@tamtamchik/json-deep-sort
 [link-downloads]: https://www.npmjs.com/package/@tamtamchik/json-deep-sort
