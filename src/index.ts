@@ -34,7 +34,7 @@ function sortRecursively<T>(
       if (
         sortPrimitiveArrays &&
         data.length > 0 &&
-        data.every((item) => !isObject(item))
+        data.every((item) => isPrimitive(item))
       ) {
         return [...data].sort((a, b) => {
           if (typeof a === 'string' && typeof b === 'string') {
@@ -74,6 +74,14 @@ function sortRecursively<T>(
 // Helper function to check if a value is an object
 function isObject(data: unknown): data is ObjectType {
   return typeof data === 'object' && data !== null;
+}
+
+function isPrimitive(data: unknown): boolean {
+  return (
+    typeof data === 'string' ||
+    typeof data === 'number' ||
+    typeof data === 'boolean'
+  );
 }
 
 // Function to sort object properties
