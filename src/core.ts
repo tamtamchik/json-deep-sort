@@ -1,4 +1,4 @@
-import { SortOptions } from './types';
+import type { SortOptions } from './types';
 import { isPrimitive, isNonSortableObject, isObject } from './type-guards';
 import { sortArray } from './array-sorter';
 import { sortObject } from './object-sorter';

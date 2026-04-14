@@ -1,4 +1,4 @@
-import { SortOptions, ObjectType, SortedEntry } from './types';
+import type { SortOptions, ObjectType, SortedEntry } from './types';
 import { compareObjectKeys } from './comparators';
 
 export function sortObject(obj: ObjectType, options: SortOptions): ObjectType {
