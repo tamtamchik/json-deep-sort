@@ -1,4 +1,4 @@
-import { SortOptions } from './types';
+import type { SortOptions } from './types';
 import { isSortablePrimitive, hasNullishValues } from './type-guards';
 import { compareSortablePrimitives } from './comparators';
 

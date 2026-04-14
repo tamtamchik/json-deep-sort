@@ -1,10 +1,5 @@
-import {
-  NULLISH_VALUES,
-  SORTABLE_PRIMITIVE_TYPES,
-  NullishValue,
-  NonSortableType,
-  ObjectType,
-} from './types';
+import { NULLISH_VALUES, SORTABLE_PRIMITIVE_TYPES } from './types';
+import type { NullishValue, NonSortableType, ObjectType } from './types';
 
 // Type guards - single responsibility, clear naming
 export function isNullish(value: unknown): value is NullishValue {
