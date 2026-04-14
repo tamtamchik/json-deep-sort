@@ -60,6 +60,7 @@
     "test": "node --import tsx --test test/*.test.ts",
     "coverage": "c8 --reporter=text --reporter=lcov node --import tsx --test test/*.test.ts",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix"
   }
