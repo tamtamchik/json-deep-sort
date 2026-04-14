@@ -36,6 +36,7 @@
     "@types/node": "^25.6.0",
     "@typescript-eslint/eslint-plugin": "^8.39.0",
     "@typescript-eslint/parser": "^8.39.0",
+    "c8": "^11.0.0",
     "eslint": "^10.2.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -57,7 +58,7 @@
     "dev": "npm run build -- --watch src",
     "prepublishOnly": "npm run build",
     "test": "node --import tsx --test test/*.test.ts",
-    "coverage": "node --import tsx --test --experimental-test-coverage test/*.test.ts",
+    "coverage": "c8 --reporter=text --reporter=lcov node --import tsx --test test/*.test.ts",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix"
