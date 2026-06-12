@@ -6,7 +6,7 @@
   "excludeFolders": ["src", "test"],
   "excludeFiles": [],
   "rules": [
-    "Sorting is recursive: nested objects and objects inside arrays are sorted too",
-    "Use it to make generated JSON deterministic so git diffs stay clean"
+    "Expect recursive sorting: nested objects and objects inside arrays are sorted too",
+    "Use sort() to make generated JSON deterministic so git diffs stay clean"
   ]
 }
