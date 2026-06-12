@@ -12,7 +12,7 @@ JSON Deep Sort is a powerful and versatile TypeScript package designed for effic
 
 - Comprehensive handling of deeply nested objects and arrays
 - Flexible sorting options, including ascending and descending order
-- Support for both synchronous and asynchronous operations
+- Optional sorting of primitive arrays
 - Preservation of non-sortable objects (e.g., Date, RegExp, Function)
 - Lightweight implementation with zero dependencies
 
