@@ -4,12 +4,15 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 10
-    groups:
-      dev-dependencies:
-        dependency-type: development
+    open-pull-requests-limit: 2
+    cooldown:
+      default-days: 7
 
+  # Workflows pin actions by full commit SHA; Dependabot updates those pins.
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    open-pull-requests-limit: 1
+    cooldown:
+      default-days: 7
