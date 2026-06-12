@@ -6,7 +6,8 @@
   "excludeFolders": ["src", "test"],
   "excludeFiles": [],
   "rules": [
-    "Expect recursive sorting: nested objects and objects inside arrays are sorted too",
-    "Use sort() to make generated JSON deterministic so git diffs stay clean"
+    "Pass sortPrimitiveArrays=true as the third argument to sort primitive arrays; by default only object keys are sorted and array order is preserved",
+    "Pass false as the second argument for descending order",
+    "sort() returns a new structure without mutating the input; Date, RegExp, Map, Set and other non-plain objects are returned untouched"
   ]
 }
