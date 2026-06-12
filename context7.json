@@ -8,6 +8,9 @@
   "rules": [
     "Pass sortPrimitiveArrays=true as the third argument to sort primitive arrays; by default only object keys are sorted and array order is preserved",
     "Pass false as the second argument for descending order",
-    "sort() returns a new structure without mutating the input; Date, RegExp, Map, Set and other non-plain objects are returned untouched"
+    "sort() returns a new structure without mutating the input; Date, RegExp, Map, Set and other non-plain objects are returned untouched",
+    "Expect arrays containing null or undefined to keep their order even with sortPrimitiveArrays=true",
+    "Expect mixed-type primitive arrays to keep their order; only same-type arrays are sorted",
+    "Expect string keys to be compared with localeCompare and symbol keys to be placed after string keys"
   ]
 }
