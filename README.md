@@ -1,11 +1,11 @@
 # JSON Deep Sort
 
-[![Buy Me A Coffee][ico-coffee]][link-coffee]
 [![Latest Version on NPM][ico-version]][link-npm]
 [![Scrutinizer build][ico-scrutinizer-build]][link-scrutinizer]
 [![Scrutinizer quality][ico-scrutinizer-quality]][link-scrutinizer]
 [![Scrutinizer coverage][ico-scrutinizer-coverage]][link-scrutinizer]
 [![Software License][ico-license]](LICENSE)
+[![Monthly Downloads][ico-downloads-month]][link-downloads]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 JSON Deep Sort is a powerful and versatile TypeScript package designed for efficient sorting of JSON objects by keys. It offers:
@@ -109,9 +109,12 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 JSON Deep Sort is [MIT licensed](./LICENSE).
 
+[![Buy Me A Coffee][ico-coffee]][link-coffee]
+
 [ico-coffee]: https://img.shields.io/badge/Buy%20Me%20A-Coffee-%236F4E37.svg?style=flat-square
 [ico-version]: https://img.shields.io/npm/v/@tamtamchik/json-deep-sort.svg?style=flat-square
 [ico-license]: https://img.shields.io/npm/l/@tamtamchik/json-deep-sort.svg?style=flat-square
+[ico-downloads-month]: https://img.shields.io/npm/dm/@tamtamchik/json-deep-sort.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/npm/dt/@tamtamchik/json-deep-sort.svg?style=flat-square
 [ico-scrutinizer-build]: https://img.shields.io/scrutinizer/build/g/tamtamchik/json-deep-sort/main.svg?style=flat-square
 [ico-scrutinizer-quality]: https://img.shields.io/scrutinizer/quality/g/tamtamchik/json-deep-sort/main.svg?style=flat-square
