@@ -1,0 +1,12 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "JSON Deep Sort",
+  "description": "A comprehensive utility for recursively sorting JSON objects by keys, producing deterministic output for clean git diffs, hashing, and comparison.",
+  "folders": [],
+  "excludeFolders": ["src", "test"],
+  "excludeFiles": [],
+  "rules": [
+    "Sorting is recursive: nested objects and objects inside arrays are sorted too",
+    "Use it to make generated JSON deterministic so git diffs stay clean"
+  ]
+}
