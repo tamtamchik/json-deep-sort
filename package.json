@@ -4,7 +4,7 @@
   "description": "A comprehensive utility for sorting JSON objects by keys.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "./src/index.ts",
+  "types": "./dist/index.d.ts",
   "author": "Yuri Tkachenko <yuri.tam.tkachenko@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/tamtamchik/json-deep-sort#readme",
@@ -42,19 +42,19 @@
     "eslint-plugin-prettier": "^5.5.4",
     "jiti": "^2.5.1",
     "prettier": "^3.6.2",
-    "tsup": "^8.3.0",
+    "tsdown": "^0.22.2",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2"
   },
   "exports": {
     ".": {
-      "types": "./src/index.ts",
+      "types": "./dist/index.d.ts",
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
     }
   },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --clean",
+    "build": "tsdown",
     "dev": "npm run build -- --watch src",
     "prepublishOnly": "npm run build",
     "test": "node --import tsx --test test/*.test.ts",
