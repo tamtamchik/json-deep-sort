@@ -7,8 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.typescriptlang.org/"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white"></a>
-  <a href="https://www.npmjs.com/package/@tamtamchik/json-deep-sort"><img alt="Latest version on npm" src="https://img.shields.io/npm/v/@tamtamchik/json-deep-sort?style=flat-square&logo=npm&logoColor=white"></a>
+  <a href="https://www.npmjs.com/package/@tamtamchik/json-deep-sort"><img alt="Latest version on npm" src="https://img.shields.io/npm/v/@tamtamchik/json-deep-sort?style=flat-square"></a>
   <a href="https://www.npmjs.com/package/@tamtamchik/json-deep-sort"><img alt="Monthly downloads" src="https://img.shields.io/npm/dm/@tamtamchik/json-deep-sort?style=flat-square"></a>
   <a href="https://www.npmjs.com/package/@tamtamchik/json-deep-sort"><img alt="Total downloads" src="https://img.shields.io/npm/dt/@tamtamchik/json-deep-sort?style=flat-square"></a>
   <a href="https://github.com/tamtamchik/json-deep-sort/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/tamtamchik/json-deep-sort/ci.yml?branch=main&style=flat-square&label=CI"></a>
