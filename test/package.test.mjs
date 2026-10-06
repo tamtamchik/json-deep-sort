@@ -8,7 +8,12 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const consumer = mkdtempSync(join(tmpdir(), 'json-deep-sort-consumer-'));
 const run = (command, args, cwd = consumer) =>
-  execFileSync(command, args, { cwd, encoding: 'utf8', stdio: 'pipe' });
+  execFileSync(command, args, {
+    cwd,
+    encoding: 'utf8',
+    stdio: 'pipe',
+    env: { ...process.env, npm_config_dry_run: 'false' },
+  });
 
 try {
   const [pack] = JSON.parse(
