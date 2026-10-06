@@ -2,14 +2,13 @@ build:
   image: default-jammy
 
   environment:
-    node: 22
+    node: 24
 
   nodes:
     coverage:
       tests:
         override:
           - npm ci
-          - npm test
           - js-scrutinizer-run
           - command: npm run coverage
             coverage:

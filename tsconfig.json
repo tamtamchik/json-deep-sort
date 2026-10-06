@@ -4,7 +4,9 @@
     "esModuleInterop": true,
     "strict": true,
     "target": "es6",
-    "moduleResolution": "node"
+    "moduleResolution": "Bundler",
+    "module": "Preserve",
+    "lib": ["ES2020"]
   },
   "include": ["src"],
   "exclude": ["node_modules"]

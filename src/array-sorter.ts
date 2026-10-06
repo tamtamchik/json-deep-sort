@@ -47,15 +47,7 @@ function allItemsHaveSameSortableType(array: unknown[]): boolean {
   if (!isSortablePrimitive(firstItem)) return false;
 
   const expectedType = typeof firstItem;
-  const allSameType = array.every((item) => typeof item === expectedType);
-
-  // If all items are the same type, we can sort them normally
-  if (allSameType) return true;
-
-  // If we have mixed primitive types, we can still "sort" them
-  // (the comparison function will return 0 for different types, maintaining order)
-  // This allows us to cover the fallback case in compareSortablePrimitives
-  return array.every(isSortablePrimitive);
+  return array.every((item) => typeof item === expectedType);
 }
 
 import { sortRecursively } from './core';
