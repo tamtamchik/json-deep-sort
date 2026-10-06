@@ -432,30 +432,25 @@ describe('JSON Deep Sort Library', () => {
       assert.deepStrictEqual(sort(input, true, true), input);
     });
 
-    it('should handle mixed primitive type comparison fallback', () => {
-      // This specifically tests the return 0; fallback when comparing
-      // different primitive types in compareSortablePrimitives
+    it('should preserve mixed primitive arrays in different arrangements', () => {
       const input = [42, 'hello', true, 3.14, 'world', false];
 
       // When sortPrimitiveArrays is true, mixed types should maintain order
       const result = sort(input, true, true);
       assert.deepStrictEqual(result, input);
 
-      // Also test with a different order to ensure the fallback is triggered
+      // Also test with a different order.
       const input2 = ['hello', 42, false, true, 3.14, 'world'];
       const result2 = sort(input2, true, true);
       assert.deepStrictEqual(result2, input2);
     });
 
-    it('should force comparison of different primitive types for coverage', () => {
-      // This test specifically targets the fallback return 0; in compareSortablePrimitives
+    it('should preserve mixed primitive arrays in both sort directions', () => {
       const input = ['z', 1, 'a', true, 'm', false];
 
-      // When sorting, the algorithm will compare 'z' vs 1, 'a' vs true, etc.
-      // This should trigger the fallback return 0; for different types
       const result = sort(input, true, true);
 
-      // Since all comparisons between different types return 0, the order should be maintained
+      // Mixed types should maintain original order.
       assert.deepStrictEqual(result, input);
 
       // Test descending order as well

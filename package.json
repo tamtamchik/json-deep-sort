@@ -1,6 +1,6 @@
 {
   "name": "@tamtamchik/json-deep-sort",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A comprehensive utility for sorting JSON objects by keys.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -32,19 +32,12 @@
     "json-tools"
   ],
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@types/node": "^26.0.1",
-    "@typescript-eslint/eslint-plugin": "^8.39.0",
-    "@typescript-eslint/parser": "^8.39.0",
-    "c8": "^11.0.0",
-    "eslint": "^10.2.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "jiti": "^2.5.1",
-    "prettier": "^3.6.2",
-    "tsdown": "^0.22.2",
-    "tsx": "^4.21.0",
-    "typescript": "^6.0.2"
+    "@biomejs/biome": "2.5.15",
+    "@types/node": "^26.6.4",
+    "c8": "^12.0.0",
+    "tsdown": "^0.23.0",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3"
   },
   "exports": {
     ".": {
@@ -54,14 +47,28 @@
     }
   },
   "scripts": {
+    "check": "biome check .",
+    "fix": "biome check --write .",
+    "typecheck": "tsc --noEmit",
     "build": "tsdown",
-    "dev": "npm run build -- --watch src",
-    "prepublishOnly": "npm run build",
+    "dev": "tsdown --watch src",
+    "prepublishOnly": "npm run check && npm run typecheck && npm run build && npm test && npm run test:package",
     "test": "node --import tsx --test test/*.test.ts",
     "coverage": "c8 --reporter=text --reporter=lcov node --import tsx --test test/*.test.ts",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "lint": "eslint . --ext .ts,.js",
-    "lint:fix": "eslint . --ext .ts,.js --fix"
+    "test:package": "node test/package.test.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^22.18.0 || ^24.11.0 || ^26.0.0",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "onFail": "error"
+    }
   }
 }
