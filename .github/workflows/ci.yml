@@ -52,4 +52,4 @@ jobs:
       - run: npm run build
       - run: npm run test:package
         env:
-          npm_config_dry_run: 'true'
+          npm_config_dry_run: "true"
