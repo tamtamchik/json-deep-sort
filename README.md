@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/tamtamchik/json-deep-sort/main/docs/assets/json-deep-sort-readme-banner.png" alt="JSON Deep Sort" width="100%">
+  <img src="https://raw.githubusercontent.com/tamtamchik/json-deep-sort/main/docs/assets/json-deep-sort-readme-banner.webp" alt="JSON Deep Sort" width="100%">
 </p>
 
 <p align="center">
